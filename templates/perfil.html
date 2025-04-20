@@ -1,0 +1,6 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h2>Bienvenido {{ usuario.nombre }} ({{ usuario.rango }})</h2>
+    <p>Tu experiencia: {{ usuario.xp }}</p>
+    <a href="/logout">Cerrar sesión</a>
+{% endblock %}

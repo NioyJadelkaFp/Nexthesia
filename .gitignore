@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# macOS files
+.DS_Store
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# MySQL / SQLite local DB
+*.db
+*.sqlite3
+
+# Logs and other temp files
+*.log
+*.pot~
+*.swp
+*.tmp
+
+# Flask cache and instance folder
+instance/
+*.pid
+
+# Uploads or generated media files
+uploads/
+static/File/
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
+
+# Test results
+junit.xml
+nosetests.xml
+test_*.xml
+
+# Other cache
+__pypackages__/
+pip-wheel-metadata/
+*.bak

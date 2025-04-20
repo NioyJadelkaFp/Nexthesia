@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div style=" height: auto; min-height: 100vh; direction: ltr; text-align: center; font-family: 'Cairo', sans-serif; margin: 20px auto; width: 90%;">
+  
+    <ul id="recentposts" class="recentposts" style="list-style: none; padding: 0;">
+      {% for publicacion in publicaciones %}
+        <li style="margin-bottom: 25px; border-bottom: 1px solid #ddd; padding-bottom: 15px;">
+          <div class="publicacion" style="text-align: left;">
+            <strong style="font-size: 1.2em; color: #333;">{{ publicacion['nombre'] }}</strong>
+            <p style="margin: 8px 0;">{{ publicacion['contenido'] }}</p>
+            <p style="font-size: 0.9em; color: #666;">
+              <small>
+                <relative-time datetime="{{ publicacion.fecha }}" lang="es">
+                  {{ publicacion.fecha }}
+                </relative-time>
+              </small>
+            </p>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+
+  <form class="Publicacion" action="/subir" method="POST" style="display: flex; flex-direction: row;; position: fixed; bottom: 0; width: 100%; background-color: #fff; padding: 10px; border-top: 2px solid #ccc; z-index: 1000;">
+    <input name="texto" id="texto" required style="flex: 1; padding: 5px; margin-right: 10px; min-width: 60%;">
+    <button type="submit" style="padding: 5px 15px; flex-shrink: 0;">Publicar</button>
+</form>
+
+
+<script>
+    // cada 10s refresca la pagina
+    setTimeout(function() {
+        location.reload();
+    }, 10000); // 10000 ms = 10 seconds
+</script>
+
+{% endblock %}

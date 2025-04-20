@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Para ajustar al compartir tu web mas SEO-->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Nioy">
+    <meta name="copyright" content="Nioy">
+    <meta name="description" content="Info que saldrá al compartir la web.">
+    <meta name="keywords" content="Palabra, separadas, por, comas">
+    <meta property="og:title" content="{{ Titulo_Web }}">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="description de la web.">
+
+    <!--Card al compartir en twitter-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TItulo de la web">
+    <meta name="twitter:description" content="Una breve descripcion de la web.">
+    <meta name="twitter:site" content="@Nioy_">
+    <meta name="twitter:creator" content="@Nioy_">
+    <!--Link de la img al compartir en twitter-->
+    <meta name="twitter:image" content="{{ url_for('static', filename='img/Logo.png') }}">
+
+    <!--Link de css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilo.css') }}">
+
+    <!--Link del icono de la web-->
+    <link rel="icon" href="{{ url_for('static', filename='img/Logo.png') }}" type="image/png">
+
+    <!--Color de barra para telefonos-->
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@github/relative-time-element@3.0.0/dist/index.js"></script>
+
+
+    <title>{{ Titulo_Web }}</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/home">Inicio</a></li>
+            <li><a href="/chat">Chat Random</a></li>
+            <li><a href="/perfil">Perfil</a></li>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+
+</body>
+</html>
