@@ -14,7 +14,7 @@ main{
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    height: 300vh;
+    height: 100vh;
     width: 100%;
     padding-top: 50px;
 }
@@ -63,3 +63,149 @@ main{
     width: 100%;
     
 }
+
+.Publicacion button{
+    color: #ffffff;
+    background-color: blue;
+    border-radius: 10px;
+    border: 1px solid blue;  
+
+}
+
+
+.Banner{
+    width: 100%;
+    height: auto;
+    min-height: 90vh; 
+    background-size: cover;
+    background-position: center;
+    background-position: top;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.Barrita{
+    width: 90%;
+    height: 1px;
+    margin: 10px auto;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Banner-Contenido{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Texto{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Texto h1{
+    font-size: 4rem;
+    color: #000000;
+    text-transform: uppercase;
+    text-wrap: balance;
+}
+
+.Texto h1 span{
+    animation: RedShow 3s 1 forwards;
+    text-wrap: balance;
+}
+
+.Texto p{
+    font-size: 1rem;
+    color: #000000;
+    text-wrap: balance;
+    margin-top: 15px;
+}
+
+.Texto p span{
+    animation: RedShow 3s 1 forwards;
+    text-wrap: balance;
+}
+
+@keyframes RedShow{
+    0%{
+        color: rgb(0, 0, 0);
+    }
+    100%{
+        color: rgb(0, 68, 255);
+    }
+    
+}
+
+.Banner-Contenido2{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Banner-Contenido2 picture{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Banner-Contenido2 img{
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    object-position: center;
+    /*filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.7));*/
+}
+
+@media screen and (max-width: 768px){
+    .Banner{
+        width: 100%;
+        height: 50vh; 
+        background-size: cover;
+        background-position: center;
+        background-position: top;
+        background-repeat: no-repeat;
+        display: flex;
+        background-color: white;
+    }
+    .Banner-Contenido{
+        width: 50%;
+        height: 50vh;
+    }
+
+    .Banner-Contenido2{
+        width: 50%;
+        height: 100%;
+    }
+
+    .Texto h1{
+        font-size: 2.4rem;
+    }
+
+    .Texto p{
+        font-size: 0.8rem;
+    }
+    .Banner-Contenido2 picture{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+

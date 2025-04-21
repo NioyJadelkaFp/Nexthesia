@@ -1,17 +1,108 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loginandregister.css') }}">
     <title>Login</title>
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+    background-color: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    }
+
+    /* Form container */
+    form {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    }
+
+    /* Input fields */
+    input {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus {
+    border-color: #000000;
+    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+    }
+
+    input::placeholder {
+    color: #aaa;
+    }
+
+    /* Submit button */
+    button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    }
+
+    button:hover {
+    background-color: #353535;
+    }
+
+    /* Register link */
+    p {
+    text-align: center;
+    margin-top: 25px;
+    color: #555;
+    font-size: 15px;
+    }
+
+    a {
+    color: #4361ee;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    }
+
+    a:hover {
+    color: #3a56d4;
+    text-decoration: underline;
+    }
+    </style>
 </head>
+
 <body>
+    <h2>Login</h2>
     <form action="/login" method="POST">
         <input type="email" name="correo" placeholder="Correo" required />
         <input type="password" name="contraseña" placeholder="Contraseña" required />
         <button type="submit">Iniciar sesión</button>
     </form>
     <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
-    
+
 </body>
+
 </html>

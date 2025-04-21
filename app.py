@@ -5,19 +5,17 @@ import hashlib
 import pymysql
 from datetime import timedelta
 import psycopg2
+import psycopg2.extras  # Asegúrate de importar extras
 from urllib.parse import urlparse
 
 app = Flask(__name__)
 app.secret_key = 'nexthesia'
-
 app.permanent_session_lifetime = timedelta(days=20)
-
 socketio = SocketIO(app)
 Titulo_Webs = 'Nexthesia'
 
-
 # URL de conexión proporcionada
-DATABASE_URL = "postgres://koyeb-adm:npg_eRNFcoYy4QH7@ep-silent-term-a2zpcjkl.eu-central-1.pg.koyeb.app/Nioy"
+DATABASE_URL = "postgres://koyeb-adm:npg_eRNFcoYy4QH7@ep-silent-term-a2zpcjkl.eu-central-1.pg.koyeb.app/koyebdb"
 
 def get_connection():
     result = urlparse(DATABASE_URL)
@@ -30,8 +28,8 @@ def get_connection():
         host=result.hostname,       # Host
         port=result.port            # Puerto
     )
+    conn.cursor_factory = psycopg2.extras.DictCursor  # Usa el DictCursor para obtener resultados como diccionarios
     return conn
-
 
 def login_requerido(f):
     @wraps(f)
@@ -56,16 +54,14 @@ def login():
 
         if user:
             session.permanent = True
-            session['user_id'] = user['id']
-            session['nombre'] = user['nombre']
-            session['rango'] = user['rango']
-            session['seccion'] = user['seccion']  # Asegúrate de que 'seccion' esté en la tabla 'usuarios'
+            session['user_id'] = user[0]  # Asumiendo que el id está en la primera columna
+            session['nombre'] = user[1]   # Asumiendo que el nombre está en la segunda columna
+            session['rango'] = user[3]    # Asumiendo que el rango está en la cuarta columna
             return redirect('/home')
         else:
-            return "Credenciales incorrectas", 401
+            return redirect('/login')
 
     return render_template('login.html')
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -93,7 +89,6 @@ def register():
 
     return render_template('register.html')
 
-
 @app.route('/subir', methods=['GET', 'POST'])
 @login_requerido
 def subir_publicacion():
@@ -106,26 +101,36 @@ def subir_publicacion():
         if not user_id:
             return redirect('/login')
 
-        # Conexión a la base de datos para obtener el nombre del usuario
+        # Conexión a la base de datos para obtener el nombre del usuario y XP
         conn = get_connection()
         with conn.cursor() as cursor:
-            cursor.execute("SELECT nombre FROM usuarios WHERE id = %s", (user_id,))
+            cursor.execute("SELECT nombre, xp FROM usuarios WHERE id = %s", (user_id,))
             user = cursor.fetchone()
-
         conn.close()
 
         if not user:
             return redirect('/login')  # Si no se encuentra el usuario, redirige al login
 
-        # El nombre del usuario se obtiene desde la base de datos
-        nombre_usuario = user['nombre']
+        # Usar índices para acceder a la información de la tupla
+        nombre_usuario = user[0]  # Primer valor es el nombre
+        xp_actual = user[1]       # Segundo valor es el xp
 
+        # Inserta la nueva publicación
         conn = get_connection()
         with conn.cursor() as cursor:
-            cursor.execute("""
+            cursor.execute(""" 
                 INSERT INTO publicaciones (titulo, contenido, user_id)
                 VALUES (%s, %s, %s)
             """, (nombre_usuario, texto, user_id))  # Usamos el nombre del usuario como título
+            conn.commit()
+
+        # Agregar 10 puntos a la experiencia del usuario
+        xp_nueva = xp_actual + 10
+        conn = get_connection()
+        with conn.cursor() as cursor:
+            cursor.execute(""" 
+                UPDATE usuarios SET xp = %s WHERE id = %s
+            """, (xp_nueva, user_id))
             conn.commit()
 
         conn.close()
@@ -133,6 +138,7 @@ def subir_publicacion():
         return redirect('/chat')
 
     return render_template('chat.html')
+
 
 @app.route('/chat')
 @login_requerido
@@ -152,7 +158,7 @@ def publicaciones():
 @app.route('/')
 def home():
     if 'user_id' in session:
-        return redirect('/')
+        return redirect('/home')
     return redirect('/login')
 
 @app.route('/perfil')
@@ -175,17 +181,15 @@ def logout():
     session.pop('rango', None)
     return redirect('/login')
 
-
 @app.route('/home')
 @login_requerido
 def index():
     return render_template('index.html', Titulo_Web=Titulo_Webs)
 
-
-#   Producción
+# Producción
 #if __name__ == '__main__':
     #socketio.run(app)
 
-#   Desarrollo
+# Desarrollo
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)

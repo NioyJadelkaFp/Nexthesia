@@ -1,9 +1,8 @@
 import psycopg2
-import os
 from urllib.parse import urlparse
 
 # URL de conexión proporcionada
-DATABASE_URL = "postgres://koyeb-adm:npg_eRNFcoYy4QH7@ep-silent-term-a2zpcjkl.eu-central-1.pg.koyeb.app/Nioy"
+DATABASE_URL = "postgres://koyeb-adm:npg_eRNFcoYy4QH7@ep-silent-term-a2zpcjkl.eu-central-1.pg.koyeb.app/koyebdb"
 
 # Función para obtener la conexión a PostgreSQL
 def get_connection():

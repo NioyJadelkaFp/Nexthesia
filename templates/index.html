@@ -1,4 +1,29 @@
 {% extends 'layout.html' %}
 {% block content %}
-
+<section class="Banner">
+    <div class="Banner-Contenido">
+      <div class="Texto">
+        <span>Sebastián, Ezequiel</span>
+        <h1>Bienvenido a <span>Nexthesia</span></h1>
+        <p>
+            En <span>Nexthesia</span>, creamos un espacio libre donde puedes expresarte sin límites. Con una
+            <span>comunidad abierta y creativa</span>, te invitamos a compartir tus ideas, pensamientos o cualquier tema que te apasione.
+          </p>
+          <p>
+            Nuestra misión es ofrecer una plataforma donde todos puedan <span>conectar, debatir y descubrir</span> contenido interesante.
+            Ya sea que quieras escribir algo profundo o simplemente <span>subir una imagen random</span>, aquí eres bienvenido.
+          </p>
+          <p>
+            En <span>Nexthesia</span>, creemos en la libertad de expresión y en construir juntos un lugar donde cada voz cuenta.
+          </p>
+          
+      </div>
+    </div>
+    <div class="Banner-Contenido2">
+      <picture>
+        <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="LOGO" />
+      </picture>
+    </div>
+  </section>
+  
 {% endblock %}
