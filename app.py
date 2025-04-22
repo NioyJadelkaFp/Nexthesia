@@ -188,7 +188,7 @@ def index():
 
 # Producción
 if __name__ == '__main__':
-    socketio.run(app)
+    app.run()
 
 # Desarrollo
 #if __name__ == '__main__':
