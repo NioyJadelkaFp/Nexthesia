@@ -39,7 +39,7 @@ def login_requerido(f):
         return f(*args, **kwargs)
     return decorada
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         correo = request.form['correo']
@@ -185,6 +185,8 @@ def logout():
 @login_requerido
 def index():
     return render_template('index.html', Titulo_Web=Titulo_Webs)
+
+
 
 # Producción
 if __name__ == '__main__':
